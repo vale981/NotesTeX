@@ -32,9 +32,8 @@
 \newif\ifnotoc\notocfalse
 \newif\ifemailadd\emailaddfalse
 \newif\iftoccontinuous\toccontinuousfalse
-\newif\ifnatbibsort\natbibsorttrue
 
-\DeclareOption{no-natbib-sort}{\natbibsortfalse}
+
 \ProcessOptions\relax
 
 % ----------------------------------------------------------------------
@@ -422,7 +421,7 @@
 %===========================================================================================================
 
 
-\ifnatbibsort\RequirePackage[numbers,sort&compress]{natbib}\else\RequirePackage[numbers,compress]{natbib}\fi
+
 \RequirePackage{color}
 \RequirePackage[colorlinks=true
 ,urlcolor=blue
@@ -734,21 +733,3 @@
     \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
   \fi
   \vskip\belowcaptionskip}
-
-
-
-
-
-%apply some formatting on the biblio
-%without redefining the whole env
-\let\oldthebibliography=\thebibliography
-\let\endoldthebibliography=\endthebibliography
-\renewenvironment{thebibliography}[1]{%
-\begin{oldthebibliography}{#1}%
-\small%
-\raggedright%
-\setlength{\itemsep}{5pt plus 0.2ex minus 0.05ex}%
-}%
-{%
-\end{oldthebibliography}%
-}
