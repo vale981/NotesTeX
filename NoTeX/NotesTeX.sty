@@ -551,14 +551,8 @@
 \usepackage{xstring}
 \usepackage{catchfile}
 
-\CatchFileDef{\headfull}{.git/HEAD}{}
-\StrGobbleRight{\headfull}{1}[\head]
-\StrBehind[2]{\head}{/}[\branch]
-\IfFileExists{.git/refs/heads/\branch}{%
-    \CatchFileDef{\commit}{.git/refs/heads/\branch}{}}{%
-    \newcommand{\commit}{\dots~(in \emph{packed-refs})}}
 
-%first page
+% first page
 \renewcommand\maketitle{
 %% First page
 \pagestyle{empty}
@@ -616,9 +610,8 @@
 \fi
 \afterEmailSpace
 {\bfseries\raggedright\sffamily Version\par}
-\@date\quad
-\commit on \branch
-\afterAuthorSpace
+\@date
+\afterAffiliationSpace
 %Erratum or addendum
 \if!\@xtum!\else\noindent{\@xtum}\afterXtumSpace\fi
 % Abstract
