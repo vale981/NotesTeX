@@ -547,6 +547,17 @@
 
 \DeclareFixedFont\trfont{OT1}{phv}{b}{sc}{11}
 
+% get commit and branch
+\usepackage{xstring}
+\usepackage{catchfile}
+
+\CatchFileDef{\headfull}{.git/HEAD}{}
+\StrGobbleRight{\headfull}{1}[\head]
+\StrBehind[2]{\head}{/}[\branch]
+\IfFileExists{.git/refs/heads/\branch}{%
+    \CatchFileDef{\commit}{.git/refs/heads/\branch}{}}{%
+    \newcommand{\commit}{\dots~(in \emph{packed-refs})}}
+
 %first page
 \renewcommand\maketitle{
 %% First page
@@ -604,6 +615,10 @@
 \PackageWarningNoLine{\jname}{E-mails are missing.\MessageBreak Plese use \protect\emailAdd\space macro to provide e-mails.}
 \fi
 \afterEmailSpace
+{\bfseries\raggedright\sffamily Version\par}
+\@date\quad
+\commit on \branch
+\afterAuthorSpace
 %Erratum or addendum
 \if!\@xtum!\else\noindent{\@xtum}\afterXtumSpace\fi
 % Abstract
